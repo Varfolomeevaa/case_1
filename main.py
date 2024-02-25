@@ -27,11 +27,13 @@ for hours in range(24):
         time = str(time_hours) + ':' + str(time_minutes)
         for i in range(1, len(turns) + 1):
             if time in turns[i][1]:
-                turns[i][0] -= 1
+                turns[i][0] -= turns[i][1].count(time)
 
         if time in cars:
             gas_need = cars[time][1]
             time_car_need = math.ceil(cars[time][0] / 10) + random.randint(-1, 1)
+            while time_car_need == 0:
+                time_car_need = math.ceil(cars[time][0] / 10) + random.randint(-1, 1)
             time_car_hours = (int(time_hours) * 60 + int(time_minutes) + time_car_need) // 60
             time_car_minutes = (int(time_hours) * 60 + int(time_minutes) + time_car_need) % 60
             if time_car_hours < 10:
@@ -55,7 +57,7 @@ for hours in range(24):
                 num_need = list(sttns_need_2.values())  # список со всеми очередями подходящих нам станций
                 stt_choice = num_need.index(min(num_need))
                 station = list(sttns_need_2.keys())[stt_choice]  # номер станции с мин очередью
-                print('В', time, 'новый клиент:', time, cars[time][1], cars[time][0], 'встал в очередь к автомату №',
+                print('В', time, 'новый клиент:', time, cars[time][1], cars[time][0], time_car_need, 'встал в очередь к автомату №',
                       station)
                 turns[station][0] += 1
                 turns[station][1].append(time_car)
