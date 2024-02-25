@@ -37,6 +37,8 @@ for hours in range(24):
                 stt_choice = num_need.index(min(num_need))
                 station = list(sttns_need.keys())[stt_choice] # номер станции с мин очередью
                 print('В',time,'новый клиент:',time,cars[time][1],cars[time][0],'встал в очередь к автомату №',station)
+                turns[station] += 1
                 for number in stations:
-                    print('Автомат №',number,'максимальная очередь:',stations[number][0],'Марки бензина:',stations[number][1],'->',... * '*',sep=' ')
+                    print('Автомат №',number,'максимальная очередь:',stations[number][0],'Марки бензина:',stations[number][1],'->', turns[number] * '*',sep=' ')
+
 
