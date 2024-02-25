@@ -26,14 +26,17 @@ for hours in range(24):
             for sttns in range(1, len(stations) + 1):
                 gases = list(stations[sttns][1])
                 if gas_need in gases:
-                    sttns_need[sttns] = turn[sttns]
+                    sttns_need[sttns] = turns[sttns]
             for i in sttns_need:
                 if sttns_need[i] == stations[i][0]:
                     del sttns_need[i]
             if sttns_need == {}:
-                print('')
+                print('В',time,'новый клиент:',time,cars[time][1],cars[time][0],'не смог заправить автомобиль и покинул АЗС',sep=' ')
             else:
                 num_need = list(sttns_need.values())  # список со всеми очередями подходящих нам станций
                 stt_choice = num_need.index(min(num_need))
                 station = list(sttns_need.keys())[stt_choice] # номер станции с мин очередью
+                print('В',time,'новый клиент:',time,cars[time][1],cars[time][0],'встал в очередь к автомату №',station)
+                for number in stations:
+                    print('Автомат №',number,'максимальная очередь:',stations[number][0],'Марки бензина:',stations[number][1],'->',... * '*',sep=' ')
 
