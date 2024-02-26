@@ -28,6 +28,8 @@ for hours in range(24):
         for i in range(1, len(turns) + 1):
             if time in turns[i][1]:
                 turns[i][0] -= turns[i][1].count(time)
+                while time in turns[i][1]:
+                    turns[i][1].remove(time)
 
         if time in cars:
             gas_need = cars[time][1]
@@ -50,15 +52,14 @@ for hours in range(24):
             for i in sttns_need_1:
                 if sttns_need_1[i] == stations[i][0]:
                     del sttns_need_2[i]
+            client = time + cars[time][1] + cars[time][0] + time_car_need
             if sttns_need_2 == {}:
-                print('В', time, 'новый клиент:', time, cars[time][1], cars[time][0],
-                      'не смог заправить автомобиль и покинул АЗС', sep=' ')
+                print('В', time, 'новый клиент:', client, 'не смог заправить автомобиль и покинул АЗС', sep=' ')
             else:
                 num_need = list(sttns_need_2.values())  # список со всеми очередями подходящих нам станций
                 stt_choice = num_need.index(min(num_need))
                 station = list(sttns_need_2.keys())[stt_choice]  # номер станции с мин очередью
-                print('В', time, 'новый клиент:', time, cars[time][1], cars[time][0], time_car_need, 'встал в очередь к автомату №',
-                      station)
+                print('В', time, 'новый клиент:', client, 'встал в очередь к автомату №', station)
                 turns[station][0] += 1
                 turns[station][1].append(time_car)
             for number in stations:
