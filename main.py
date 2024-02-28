@@ -7,6 +7,7 @@ turns = {}
 clients = {}
 cars = {}
 left_clients = 0
+result = 0
 
 volume = {RU.GAS_1: 0, RU.GAS_2: 0, RU.GAS_3: 0, RU.GAS_4: 0}
 prices = {RU.GAS_1: 42, RU.GAS_2: 48.9, RU.GAS_3: 52.45, RU.GAS_4: 67.2}
@@ -89,7 +90,6 @@ with open('result.txt', 'w', encoding="utf-8") as rslt:
     print(RU.VOLUME, file=rslt)
     for i in volume:
         print(i, ':', volume[i], file=rslt)
-    result = 0
     for i in prices:
         result += prices[i] * volume[i]
     print(RU.RESULT, result, file=rslt)
